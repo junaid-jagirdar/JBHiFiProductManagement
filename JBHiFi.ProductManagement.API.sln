@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFi.ProductManagement.Business", "JBHiFi.ProductManagement.Business\JBHiFi.ProductManagement.Business.csproj", "{570785A0-205F-49BA-9306-10078FDAB1CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFi.ProductManagement.Tests", "JBHiFi.ProductManagement.Tests\JBHiFi.ProductManagement.Tests.csproj", "{8CABA7DA-2316-4368-9065-267AF96139F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.Tests", "JBHiFi.ProductManagement.Tests\JBHiFi.ProductManagement.Tests.csproj", "{8CABA7DA-2316-4368-9065-267AF96139F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.Infrastructure", "JBHiFi.ProductManagement.Business\JBHiFi.ProductManagement.Infrastructure.csproj", "{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{8CABA7DA-2316-4368-9065-267AF96139F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CABA7DA-2316-4368-9065-267AF96139F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CABA7DA-2316-4368-9065-267AF96139F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
