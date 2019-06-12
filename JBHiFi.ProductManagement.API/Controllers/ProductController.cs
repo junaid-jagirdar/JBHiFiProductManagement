@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CSharpFunctionalExtensions;
 using JBHiFi.ProductManagement.API.Model;
-using JBHiFi.ProductManagement.Business;
-using JBHiFi.ProductManagement.Business.Interfaces;
 using JBHiFi.ProductManagement.Business.Entities;
+using JBHiFi.ProductManagement.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JBHiFi.ProductManagement.API.Controllers
 {
@@ -43,7 +40,7 @@ namespace JBHiFi.ProductManagement.API.Controllers
                 return BadRequest("Unable to fetch details");
 
             }
-            var result = _mapper.Map<ProductDto>(productEntity.Value);
+            var result = Mapper.Map<ProductDto>(productEntity.Value);
             return Ok(result);
         }
 
@@ -57,7 +54,7 @@ namespace JBHiFi.ProductManagement.API.Controllers
                 return BadRequest("Unable to fetch details");
 
             }
-            var result = _mapper.Map<ProductDto>(productEntity.Value);
+            var result = Mapper.Map<ProductDto>(productEntity.Value);
             return Ok(result);
         }
 
@@ -68,7 +65,15 @@ namespace JBHiFi.ProductManagement.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var productEntity = Mapper.Map<Product>(productForCreation);
+
+            Product productEntity = new Product()
+            {
+                Brand = productForCreation.Brand,
+                Description = productForCreation.Description,
+                Id = productForCreation.Id,
+                Model = productForCreation.Model
+
+            };
             _commandHandler.Handle(productEntity);
             return NoContent();
         }
@@ -86,7 +91,15 @@ namespace JBHiFi.ProductManagement.API.Controllers
                 ModelState.AddModelError("Description", "The provided description should be different from the brand.");
             }
 
-            var productEntity = Mapper.Map<Product>(productForUpdation);
+            
+            Product productEntity = new Product()
+            {
+                Brand = productForUpdation.Brand,
+                Description = productForUpdation.Description,
+                Id = productForUpdation.Id,
+                Model = productForUpdation.Model
+
+            };
             _commandHandler.Handle<Product>(productEntity);
             return NoContent();
         }

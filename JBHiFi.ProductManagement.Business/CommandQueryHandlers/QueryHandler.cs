@@ -1,9 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using JBHiFi.ProductManagement.Business.Interfaces;
 using StructureMap;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JBHiFi.ProductManagement.Business.CommandQueryHandlers
 {

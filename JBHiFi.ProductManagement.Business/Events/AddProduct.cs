@@ -1,9 +1,6 @@
 ﻿using JBHiFi.ProductManagement.Business.Entities;
 using JBHiFi.ProductManagement.Business.Interfaces;
 using LiteDB;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JBHiFi.ProductManagement.Business
 {

@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CSharpFunctionalExtensions;
 using JBHiFi.ProductManagement.API.Model;
 using JBHiFi.ProductManagement.Business;
 using JBHiFi.ProductManagement.Business.CommandQueryHandlers;
 using JBHiFi.ProductManagement.Business.Entities;
 using JBHiFi.ProductManagement.Business.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using StructureMap;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace JBHiFi.ProductManagement.API
 {
@@ -37,7 +35,6 @@ namespace JBHiFi.ProductManagement.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddSingleton<ProductInfoContext>();
             services.AddScoped<IQueryAll<Product>, GetAllProducts>();
             services.AddScoped<IQueryFor<string, Result<Product>>, GetProductById>();
@@ -46,6 +43,32 @@ namespace JBHiFi.ProductManagement.API
             services.AddScoped<ICommand<Product>, AddProduct>();
             services.AddScoped<ICommand<string>,DeleteProduct>();
             services.AddScoped<IQueryHandler, QueryHandler>();
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title ="JB Hi Fi Product Mangemet Web API",
+                    Description = "This application is used to get products and add products"
+                });
+            });
+
+            //enable cors
+            services.AddCors();
+            //enable Jwt authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+
+            }); ;
             IContainer container = new Container();
 
             container.Configure(q =>
@@ -75,7 +98,25 @@ namespace JBHiFi.ProductManagement.API
             app.UseMvc();
 
             app.UseStatusCodePages();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JB Hi Fi API V1");
+            });
 
+            //use cors
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            //use Jwt Authentication
+            app.UseAuthentication();
+#pragma warning disable CS0618 // Type or member is obsolete
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<Product, ProductForCreationDto>();
+                cfg.CreateMap<Product, ProductForUpdateDto>();
+              
+                
+            });
+#pragma warning restore CS0618 // Type or member is obsolete
 
         }
     }
