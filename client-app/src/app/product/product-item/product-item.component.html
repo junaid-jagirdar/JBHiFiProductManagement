@@ -1,0 +1,50 @@
+<div>
+  {{errMsg}}
+</div>
+<div *ngIf="operationMode == 'view'">
+  Brand:{{product.brand}}
+  <br /><br />
+  Model:{{product.model}}
+  <br /><br />
+  Description:{{product.description}}
+  <br />
+  <br />
+  <button class="btn btn-primary" type="button" (click)="setToEditMode()">Edit</button>
+</div>
+
+<div *ngIf="operationMode == 'add'">
+  <form (ngSubmit)="onSubmitAdd(f)" #f="ngForm">
+      <div class="form-group">
+          <label>Brand</label>
+          <input class="form-control" type="text" ngModel name="brand" />
+      </div>
+      <div class="form-group">
+          <label>Model</label>
+          <input class="form-control" type="text" ngModel name="model" />
+      </div>
+      <div class="form-group">
+          <label>Description</label>
+          <input class="form-control" type="text" ngModel name="description" />
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="operationMode == 'edit'">
+  <form (ngSubmit)="onSubmitEdit(f)" #f="ngForm">
+      <input type="hidden" [(ngModel)]="product.id" name="id" class="form-control" />
+      <div class="form-group">
+          <label>Brand</label>
+          <input type="text" [(ngModel)]="product.brand" name="brand" class="form-control" />
+      </div>
+      <div class="form-group">
+          <label>Model</label>
+          <input type="text" [(ngModel)]="product.model" name="model" class="form-control" />
+      </div>
+      <div class="form-group">
+          <label>Description</label>
+          <input type="text" [(ngModel)]="product.description" name="description" class="form-control" />
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div>

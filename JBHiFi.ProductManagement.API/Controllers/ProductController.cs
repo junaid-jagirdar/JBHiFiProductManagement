@@ -40,9 +40,10 @@ namespace JBHiFi.ProductManagement.API.Controllers
 
         // GET api/products
         [HttpGet]
-        public IActionResult Get([FromQuery]ProductFilterDto productFilter)
+        public IActionResult Get([FromQuery]ProductFilterDto productFilterdto)
         {
-            var productEntity = _queryHandler.Handle<ProductFilterDto, Result<IEnumerable<Product>>>(productFilter);
+            var productFilter = new ProductFilter { Brand = productFilterdto.Brand, Description = productFilterdto.Description, Model = productFilterdto.Model };
+            var productEntity = _queryHandler.Handle<ProductFilter, Result<IEnumerable<Product>>>(productFilter);
             if (productEntity.IsFailure)
             {
                 return BadRequest("Unable to fetch details");

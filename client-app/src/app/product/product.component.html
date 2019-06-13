@@ -1,0 +1,29 @@
+<div>
+  <br/><br /><br />
+  <div class="row">
+      <div class="col-sm-2">
+          <label>Filter By Brand</label>
+          <input class="form-control" type="text" [(ngModel)]="filter.brand" (input)="onFilterChanged()">
+      </div>
+
+      <div class="col-sm-2">
+          <label>Filter By Model</label>
+          <input class="form-control" type="text" [(ngModel)]="filter.model" (input)="onFilterChanged()">
+      </div>
+
+      <div class="col-sm-2">
+          <label>Filter By Description</label>
+          <input class="form-control" type="text" [(ngModel)]="filter.description" (input)="onFilterChanged()">
+      </div>
+  </div>
+
+  <div><button class="btn btn-link" (click)="addProduct()">Add New Product</button></div>
+  <div class="row">
+      <div class="col-lg-5">
+          <product-list></product-list>
+      </div>
+      <div class="col-lg-3">
+          <product-item></product-item>
+      </div>
+  </div>
+</div>
