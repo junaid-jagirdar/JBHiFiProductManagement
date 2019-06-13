@@ -5,11 +5,9 @@ VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.API", "JBHiFi.ProductManagement.API\JBHiFi.ProductManagement.API.csproj", "{00822B38-A6A2-4CBE-828D-0BE2D744C019}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFi.ProductManagement.Business", "JBHiFi.ProductManagement.Business\JBHiFi.ProductManagement.Business.csproj", "{570785A0-205F-49BA-9306-10078FDAB1CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.Business", "JBHiFi.ProductManagement.Business\JBHiFi.ProductManagement.Business.csproj", "{570785A0-205F-49BA-9306-10078FDAB1CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.Tests", "JBHiFi.ProductManagement.Tests\JBHiFi.ProductManagement.Tests.csproj", "{8CABA7DA-2316-4368-9065-267AF96139F3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JBHiFi.ProductManagement.Infrastructure", "JBHiFi.ProductManagement.Business\JBHiFi.ProductManagement.Infrastructure.csproj", "{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBHiFi.ProductManagement.Tests", "JBHiFi.ProductManagement.Tests\JBHiFi.ProductManagement.Tests.csproj", "{9533F900-8B1C-43CA-A934-B9546FECD429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +23,10 @@ Global
 		{570785A0-205F-49BA-9306-10078FDAB1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{570785A0-205F-49BA-9306-10078FDAB1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{570785A0-205F-49BA-9306-10078FDAB1CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CABA7DA-2316-4368-9065-267AF96139F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CABA7DA-2316-4368-9065-267AF96139F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CABA7DA-2316-4368-9065-267AF96139F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CABA7DA-2316-4368-9065-267AF96139F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD9207A9-0DEA-46CD-B487-E9DDBD049DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9533F900-8B1C-43CA-A934-B9546FECD429}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9533F900-8B1C-43CA-A934-B9546FECD429}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9533F900-8B1C-43CA-A934-B9546FECD429}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9533F900-8B1C-43CA-A934-B9546FECD429}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

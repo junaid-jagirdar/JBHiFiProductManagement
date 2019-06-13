@@ -13,18 +13,12 @@ namespace JBHiFi.ProductManagement.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        //private  readonly IProductRepository _productRepository;
-        private readonly IMapper _mapper;
-
-        //public ProductsController(IProductRepository repository,IMapper mapper )
-        //{
-        //    _mapper = mapper;
-        //    _productRepository = repository;
-        //}
+       
         private readonly IQueryHandler _queryHandler;
         private readonly ICommandHandler _commandHandler;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IQueryHandler queryHandler, ICommandHandler commandHandler, IMapper mapper)
+        public ProductsController(IQueryHandler queryHandler, ICommandHandler commandHandler,IMapper mapper)
         {
             _queryHandler = queryHandler;
             _commandHandler = commandHandler;
@@ -40,7 +34,7 @@ namespace JBHiFi.ProductManagement.API.Controllers
                 return BadRequest("Unable to fetch details");
 
             }
-            var result = Mapper.Map<ProductDto>(productEntity.Value);
+            var result = _mapper.Map<ProductDto>(productEntity.Value);
             return Ok(result);
         }
 
@@ -54,7 +48,7 @@ namespace JBHiFi.ProductManagement.API.Controllers
                 return BadRequest("Unable to fetch details");
 
             }
-            var result = Mapper.Map<ProductDto>(productEntity.Value);
+            var result = _mapper.Map<IEnumerable<ProductDto>>(productEntity.Value);
             return Ok(result);
         }
 
@@ -81,17 +75,17 @@ namespace JBHiFi.ProductManagement.API.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(string id,[FromBody] ProductForUpdateDto productForUpdation)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+          
 
             if (productForUpdation.Description == productForUpdation.Brand)
             {
                 ModelState.AddModelError("Description", "The provided description should be different from the brand.");
             }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            
             Product productEntity = new Product()
             {
                 Brand = productForUpdation.Brand,

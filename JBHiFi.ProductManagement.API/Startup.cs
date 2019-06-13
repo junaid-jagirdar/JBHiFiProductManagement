@@ -68,15 +68,21 @@ namespace JBHiFi.ProductManagement.API
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
 
-            }); ;
+            });
+
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Product, ProductDto>();
+                cfg.CreateMap<Product, ProductForCreationDto>();
+                cfg.CreateMap<Product, ProductForUpdateDto>();
+            });
             IContainer container = new Container();
 
             container.Configure(q =>
             {
-              
                 q.AddRegistry<ApiBusinessRegistry>();
-                
                 q.Populate(services);
+                q.For<IMapper>().Use(configuration.CreateMapper());
             });
 
             return container.GetInstance<IServiceProvider>();
@@ -84,7 +90,7 @@ namespace JBHiFi.ProductManagement.API
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IMapper auto)
         {
             if (env.IsDevelopment())
             {
@@ -107,17 +113,6 @@ namespace JBHiFi.ProductManagement.API
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             //use Jwt Authentication
             app.UseAuthentication();
-#pragma warning disable CS0618 // Type or member is obsolete
-            AutoMapper.Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Product, ProductDto>();
-                cfg.CreateMap<Product, ProductForCreationDto>();
-                cfg.CreateMap<Product, ProductForUpdateDto>();
-              
-                
-            });
-#pragma warning restore CS0618 // Type or member is obsolete
-
         }
     }
 }
